@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# SPDX-License-Identifier: CDDL-1.0
+#
+
+#
+# just a test invoker
+#
+java -jar pctgemini.jar

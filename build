@@ -1,0 +1,70 @@
+#!/bin/sh
+#
+# SPDX-License-Identifier: CDDL-1.0
+#
+
+#
+# new PMD version has categories only, configured in pmd-ruleset.xml
+#
+PMDRULES="./pmd-ruleset.xml"
+PMDCACHE="${HOME}/.pmd/cache.pctgemini"
+
+JAVAC="javac"
+JAR="jar"
+JAVADOC="javadoc"
+JLINK="jlink"
+
+if [ -f /usr/jdk/instances/jdk11/bin/javac ]; then
+    JAVAC="/usr/jdk/instances/jdk11/bin/javac"
+    JAR="/usr/jdk/instances/jdk11/bin/jar"
+    JAVADOC="/usr/jdk/instances/jdk11/bin/javadoc"
+    JLINK="/usr/jdk/instances/jdk11/bin/jlink"
+fi
+
+case $1 in
+clean|-clean)
+	rm -f $(find . -name '*.class')
+	rm -f $(find . -name '*~')
+	rm -fr javadoc
+	exit 0
+	;;
+package|-package)
+	./pkg/mkproto > pp
+	pkgmk -d /tmp -f pp -r $(pwd) TRIBpctgemini
+	pkgtrans -s /tmp /tmp/TRIBpctgemini.pkg TRIBpctgemini
+	rm pp
+	cd /tmp || exit 1
+	if [ -x "${THOME}"/build/create_zap_from_pkg ]; then
+	    "${THOME}"/build/create_zap_from_pkg TRIBpctgemini /tmp/TRIBpctgemini.pkg
+	else
+	    zip -q -r TRIBpctgemini TRIBpctgemini
+	    mv TRIBpctgemini.zip TRIBpctgemini.zap
+	    ls -l /tmp/TRIBpctgemini.pkg /tmp/TRIBpctgemini.zap
+	fi
+	rm -fr /tmp/TRIBpctgemini
+	exit 0
+	;;
+javadoc|-javadoc)
+	rm -fr javadoc
+	mkdir javadoc
+	$JAVADOC -Xdoclint:all -d javadoc uk.co.petertribble.pctgemini.network
+	exit 0
+	;;
+pmd|-pmd)
+	RULESETS=""
+	shift
+	for RULE in $PMDCATRULES "$@"
+	do
+	    RULESETS="${RULESETS},category/java/${RULE}.xml"
+	done
+	RULESETS=${RULESETS/,/}
+	if [ ! -d "${HOME}/.pmd" ]; then
+	    mkdir -p "${HOME}/.pmd"
+	fi
+	pmd check --cache "${PMDCACHE}" -d uk -R "${PMDRULES}" --use-version java-11 2>/dev/null
+	exit 0
+	;;
+esac
+
+$JAVAC -Xlint uk/co/petertribble/pctgemini/*/*.java
+$JAR cmf pctgemini.manifest pctgemini.jar $(find uk -name '*.class')

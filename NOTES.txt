@@ -1,0 +1,72 @@
+Here are some notes on how to write a client.
+
+https://geminiprotocol.net/docs/
+
+https://geminiprotocol.net/docs/tech-overview.gmi
+
+Simple SSL implementation:
+https://www.geeksforgeeks.org/how-to-secure-communication-using-ssl-tls-in-java/
+I've got a private TrustManager implementation, which might be
+extended to check for valid certs in the future (in other words, to
+verify saved certs)
+Could do with a singleton SSSLsocketFactory implementation that's
+fully customized and configured rather than creating a new customized
+one each request
+One question is whether we should call 'new GeminiRequest' and wait
+for it to get the resource, or whether we create it, and add it to a
+request queue which calls doConnect() and manages the process in the
+background
+Need to save the byte array back to the response
+JumbleUtils has a byteToString method we can use
+All I need then is something like the manpage viewer to display it
+
+What we send:
+
+<URL><CR><LF>
+
+That's it. We just send a URL, fully qualified.
+
+The scheme is "gemini", default port is 1965
+
+What we get:
+
+A one-line header
+
+<STATUS><SPACE><META><CR><LF>
+
+optionally followed by a response body.
+
+The STATUS code is 2 digits:
+
+1x - need more input, Prompt for some extra information with META as
+the prompt string, then resend with the user's response as a query
+component for the original URL
+
+2x - success, and the response follows; META is the mime type
+
+3x redirect; go to the new URL listed in META.
+
+4x temporary failure
+
+5x permanent failure
+
+6x client certificate required
+
+You only get a body with a 2x code. Any other code and there shouldn't
+be a body, and if there is you're supposed to ignore it.
+
+So we take the response header, split at the first space. If the first
+string isn't 2 characters long, immediately fail as a bad response. If
+the second digit isn't numeric, fail as a bad response. If the first
+digit isn't 1-6, fail as a bad response. Realistically, we can do this
+as string manipulation, there's no need for numbers.
+Then switch on the code;
+  1x throw up a prompt page (with 11, mask the input)
+  2x show the page
+  3x redirect (avoiding loops)
+  4x,5x show error page
+  6x show unimplemented error page
+
+TLS and SNI are mandatory, and at least TLSv1.2, preferably TLSv1.3.
+Certs are TOFU (so if you haven't seen it before you save it and check
+later that it hasn't changed)
