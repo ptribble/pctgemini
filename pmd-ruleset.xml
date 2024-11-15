@@ -10,6 +10,16 @@
     </description>
 
     <rule ref="category/java/security.xml" />
+    <rule ref="category/java/codestyle.xml">
+      <exclude name="AtLeastOneConstructor"/>
+      <exclude name="CallSuperInConstructor"/>
+      <exclude name="CommentDefaultAccessModifier"/>
+      <exclude name="LocalVariableCouldBeFinal"/>
+      <exclude name="MethodArgumentCouldBeFinal"/>
+      <exclude name="OnlyOneReturn"/>
+      <exclude name="ShortVariable"/>
+      <exclude name="UseUnderscoresInNumericLiterals"/>
+    </rule>
     <rule ref="rulesets/java/quickstart.xml">
       <exclude name="EmptyCatchBlock"/>
       <exclude name="ReturnEmptyCollectionRatherThanNull"/>
