@@ -34,10 +34,12 @@ public final class GeminiExample {
      * @param args ignored
      */
     public static void main(String[] args) {
-	GeminiRequest greq = new GeminiRequest(
-		    "gemini://geminiprotocol.net/docs/tech-overview.gmi");
+	String sreq = (args.length > 0) ? args[0]
+	    : "gemini://geminiprotocol.net/docs/tech-overview.gmi";
+	GeminiRequest greq = new GeminiRequest(sreq);
 	greq.doConnect();
 	GeminiResponse gresp = greq.getResponse();
+	System.out.println(gresp.minorCode());
 	System.out.println(gresp.metaText());
 	System.out.println(gresp.bodyAsString());
 	System.out.println(GeminiUtils.geminiToHtml(gresp.bodyAsString()));
