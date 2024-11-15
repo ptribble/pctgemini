@@ -111,7 +111,11 @@ public final class GeminiPanel extends JEditorPane
 	    greq.doConnect();
 	    if (greq.getStatus() == GeminiRequest.STAT_SUCCESS) {
 		gresp = greq.getResponse();
-		loadPage(url, gresp);
+		if (gresp.hasBody()) {
+		    loadPage(url, gresp);
+		} else {
+		    loadFail(url, gresp);
+		}
 	    } else {
 		curLabel.setText("Connection failed");
 	    }
@@ -135,6 +139,31 @@ public final class GeminiPanel extends JEditorPane
 	historyList.add(url);
 	pageCache.put(url, gresp);
 	backButton.setEnabled(historyList.size() > 1);
+    }
+
+    /*
+     * Display details of a failed response. Note that we caught connection
+     * failures earlier, this is for the case where we got a reply that
+     * wasn't a 2x code.
+     */
+    private void loadFail(String url, GeminiResponse gresp) {
+	int rescode1 = gresp.majorCode();
+	if (rescode1 == 1) {
+	    jep.setText("Unhandled code: need more input " + gresp.metaText());
+	} else if (rescode1 == 3) {
+	    jep.setText("Unhandled redirect to: " + gresp.metaText());
+	} else if (rescode1 == 4) {
+	    jep.setText("Temporary failure: " + gresp.metaText());
+	} else if (rescode1 == 5) {
+	    jep.setText("Permanent failure: " + gresp.metaText());
+	} else if (rescode1 == 6) {
+	    jep.setText("Client certificate required: " + gresp.metaText());
+	}
+	jep.setMargin(new Insets(5, 5, 5, 5));
+	jep.setCaretPosition(0);
+	jep.setEditable(false);
+	curLabel.setText("Error for " + url);
+	backButton.setEnabled(true);
     }
 
     /*
