@@ -47,7 +47,7 @@ package|-package)
 javadoc|-javadoc)
 	rm -fr javadoc
 	mkdir javadoc
-	$JAVADOC -Xdoclint:all -d javadoc uk.co.petertribble.pctgemini.network
+	$JAVADOC -Xdoclint:all -d javadoc uk.co.petertribble.pctgemini.{gui,network}
 	exit 0
 	;;
 pmd|-pmd)
