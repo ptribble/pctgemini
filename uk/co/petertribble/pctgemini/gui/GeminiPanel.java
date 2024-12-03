@@ -147,6 +147,7 @@ public final class GeminiPanel extends JEditorPane
      * wasn't a 2x code.
      */
     private void loadFail(String url, GeminiResponse gresp) {
+	historyList.add(url);
 	int rescode1 = gresp.majorCode();
 	if (rescode1 == 1) {
 	    jep.setText("Unhandled code: need more input " + gresp.metaText());
