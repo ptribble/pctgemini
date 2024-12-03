@@ -58,6 +58,10 @@ public class GeminiRequest {
      */
     private int status;
     /**
+     * Request error, if any,
+     */
+    private String statusMsg;
+    /**
      * The response to this request.
      */
     private GeminiResponse response;
@@ -130,6 +134,7 @@ public class GeminiRequest {
 	} catch (IOException ioe) {
 	    // indicate a failure at the connection level
 	    status = STAT_FAIL;
+	    statusMsg = ioe.getMessage();
 	}
     }
 
@@ -150,10 +155,12 @@ public class GeminiRequest {
 	    }
 	}
     }
+
     private String getHost() {
 	setBackURL();
 	return backurl.getHost();
     }
+
     private int getPort() {
 	setBackURL();
 	int nport = backurl.getPort();
@@ -182,6 +189,15 @@ public class GeminiRequest {
      */
     public int getStatus() {
 	return status;
+    }
+
+    /**
+     * Describe the current status of this request.
+     *
+     * @return a String describing the current status of this GeminiRequest
+     */
+    public String getStatusMsg() {
+	return statusMsg;
     }
 
     /**
