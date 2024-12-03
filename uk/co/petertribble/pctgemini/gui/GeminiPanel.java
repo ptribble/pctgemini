@@ -100,6 +100,11 @@ public final class GeminiPanel extends JEditorPane
     public void loadPage(String url) {
 	surl = url;
 	/*
+	 * Always add the page to the history list, so we can always go
+	 * back whatever happens.
+	 */
+	historyList.add(url);
+	/*
 	 * If the page is in the cache, load from there. This is only
 	 * used in the case we go back, as that clears the cache.
 	 */
@@ -118,6 +123,7 @@ public final class GeminiPanel extends JEditorPane
 		}
 	    } else {
 		curLabel.setText("Connection failed");
+		System.err.println(greq.getStatusMsg());
 	    }
 	}
     }
@@ -136,7 +142,6 @@ public final class GeminiPanel extends JEditorPane
 	jep.setCaretPosition(0);
 	jep.setEditable(false);
 	curLabel.setText(url);
-	historyList.add(url);
 	pageCache.put(url, gresp);
 	backButton.setEnabled(historyList.size() > 1);
     }
@@ -147,7 +152,6 @@ public final class GeminiPanel extends JEditorPane
      * wasn't a 2x code.
      */
     private void loadFail(String url, GeminiResponse gresp) {
-	historyList.add(url);
 	int rescode1 = gresp.majorCode();
 	if (rescode1 == 1) {
 	    jep.setText("Unhandled code: need more input " + gresp.metaText());
