@@ -21,6 +21,11 @@ if [ -f /usr/jdk/instances/jdk11/bin/javac ]; then
     JLINK="/usr/jdk/instances/jdk11/bin/jlink"
 fi
 
+JARLIBDIR=lib/java
+JINGLEJAR=${JARLIBDIR}/jingle.jar
+JUMBLEJAR=${JARLIBDIR}/jumble.jar
+BUILDJARS=${JINGLEJAR}:${JUMBLEJAR}
+
 case $1 in
 clean|-clean)
 	rm -f $(find . -name '*.class')
@@ -47,7 +52,7 @@ package|-package)
 javadoc|-javadoc)
 	rm -fr javadoc
 	mkdir javadoc
-	$JAVADOC -Xdoclint:all -d javadoc uk.co.petertribble.pctgemini.{gui,network}
+	$JAVADOC -classpath "$BUILDJARS:." -Xdoclint:all -d javadoc uk.co.petertribble.pctgemini.{gui,network}
 	exit 0
 	;;
 pmd|-pmd)
@@ -61,10 +66,10 @@ pmd|-pmd)
 	if [ ! -d "${HOME}/.pmd" ]; then
 	    mkdir -p "${HOME}/.pmd"
 	fi
-	pmd check --cache "${PMDCACHE}" -d uk -R "${PMDRULES}" --use-version java-11 2>/dev/null
+	pmd check --cache "${PMDCACHE}" -d uk -R "${PMDRULES}" --use-version java-11 --aux-classpath $(echo lib/java/* | sed 's= =:=g') 2>/dev/null
 	exit 0
 	;;
 esac
 
-$JAVAC -Xlint uk/co/petertribble/pctgemini/*/*.java
-$JAR cmf pctgemini.manifest pctgemini.jar $(find uk -name '*.class')
+$JAVAC -Xlint -classpath ".:${BUILDJARS}" uk/co/petertribble/pctgemini/*/*.java
+$JAR cmf pctgemini.manifest lib/java/pctgemini.jar $(find uk -name '*.class')

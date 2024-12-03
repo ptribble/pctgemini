@@ -1,1 +1,2 @@
+Class-Path: jingle.jar jumble.jar
 Main-Class: uk.co.petertribble.pctgemini.gui.SimpleGeminiFrame

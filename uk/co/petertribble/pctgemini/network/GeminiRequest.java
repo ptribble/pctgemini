@@ -58,7 +58,7 @@ public class GeminiRequest {
      */
     private int status;
     /**
-     * Request error, if any,
+     * Request error, if any.
      */
     private String statusMsg;
     /**

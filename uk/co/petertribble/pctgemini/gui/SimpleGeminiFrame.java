@@ -37,6 +37,14 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
      * A menu item for Exit.
      */
     private JMenuItem exitItem;
+    /**
+     * A menu item for View Source.
+     */
+    private JMenuItem viewSourceItem;
+    /**
+     * The panel being displayed.
+     */
+    private GeminiPanel gpanel;
 
     /**
      * Create a new SimpleGeminiFrame, which is simply a wrapper around
@@ -50,6 +58,10 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
 
 	JMenu jmf = new JMenu("File");
 	jmf.setMnemonic(KeyEvent.VK_F);
+	viewSourceItem = new JMenuItem("View Source", KeyEvent.VK_U);
+	viewSourceItem.addActionListener(this);
+	jmf.add(viewSourceItem);
+	jmf.addSeparator();
 	exitItem = new JMenuItem("Exit", KeyEvent.VK_X);
 	exitItem.addActionListener(this);
 	jmf.add(exitItem);
@@ -58,7 +70,7 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
 	jm.add(jmf);
 	setJMenuBar(jm);
 
-	GeminiPanel gpanel = new GeminiPanel();
+	gpanel = new GeminiPanel();
 	add(gpanel);
 
         setSize(720, 600);
@@ -74,10 +86,21 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
 	}
     }
 
+    /**
+     * Pop up a window with the source of the currently diasplayed page.
+     * Simply directs the panel to do the actual work.
+     */
+    public void showViewSource() {
+	gpanel.viewSource();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 	if (exitItem.equals(e.getSource())) {
 	    System.exit(0);
+	}
+	if (viewSourceItem.equals(e.getSource())) {
+	    showViewSource();
 	}
     }
 

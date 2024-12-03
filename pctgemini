@@ -9,4 +9,4 @@
 # The Gemini protocol requires everything to be UTF-8. In JDK18 that's
 # the default encoding, but need to specify it for older versions.
 #
-java -Dfile.encoding="UTF-8" -jar pctgemini.jar "$@"
+java -Dfile.encoding="UTF-8" -jar lib/java/pctgemini.jar "$@"

@@ -31,6 +31,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
+import uk.co.petertribble.jingle.JingleInfoFrame;
 
 import uk.co.petertribble.pctgemini.network.GeminiRequest;
 import uk.co.petertribble.pctgemini.network.GeminiResponse;
@@ -185,6 +186,16 @@ public final class GeminiPanel extends JEditorPane
 	    String sold = historyList.get(s - 2);
 	    historyList.remove(s - 2);
 	    loadPage(sold);
+	}
+    }
+
+    /**
+     * Pop up the source to the current page.
+     */
+    public void viewSource() {
+	GeminiResponse gresp = pageCache.get(surl);
+	if (gresp != null) {
+	    new JingleInfoFrame(gresp.bodyAsString(), "text/plain");
 	}
     }
 
