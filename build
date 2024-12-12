@@ -37,16 +37,9 @@ package|-package)
 	./pkg/mkproto > pp
 	pkgmk -d /tmp -f pp -r $(pwd) TRIBpctgemini
 	pkgtrans -s /tmp /tmp/TRIBpctgemini.pkg TRIBpctgemini
-	rm pp
-	cd /tmp || exit 1
-	if [ -x "${THOME}"/build/create_zap_from_pkg ]; then
-	    "${THOME}"/build/create_zap_from_pkg TRIBpctgemini /tmp/TRIBpctgemini.pkg
-	else
-	    zip -q -r TRIBpctgemini TRIBpctgemini
-	    mv TRIBpctgemini.zip TRIBpctgemini.zap
-	    ls -l /tmp/TRIBpctgemini.pkg /tmp/TRIBpctgemini.zap
-	fi
 	rm -fr /tmp/TRIBpctgemini
+	ls -l /tmp/TRIBpctgemini.pkg 
+	rm pp
 	exit 0
 	;;
 javadoc|-javadoc)
