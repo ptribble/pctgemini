@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: CDDL-1.0
 #
+# Copyright 2025 Peter Tribble
+#
 
 #
 # new PMD version has categories only, configured in pmd-ruleset.xml
@@ -12,13 +14,11 @@ PMDCACHE="${HOME}/.pmd/cache.pctgemini"
 JAVAC="javac"
 JAR="jar"
 JAVADOC="javadoc"
-JLINK="jlink"
 
 if [ -f /usr/jdk/instances/jdk11/bin/javac ]; then
     JAVAC="/usr/jdk/instances/jdk11/bin/javac"
     JAR="/usr/jdk/instances/jdk11/bin/jar"
     JAVADOC="/usr/jdk/instances/jdk11/bin/javadoc"
-    JLINK="/usr/jdk/instances/jdk11/bin/jlink"
 fi
 
 JARLIBDIR=lib/java
@@ -27,13 +27,13 @@ JUMBLEJAR=${JARLIBDIR}/jumble.jar
 BUILDJARS=${JINGLEJAR}:${JUMBLEJAR}
 
 case $1 in
-clean|-clean)
+clean)
 	rm -f $(find . -name '*.class')
 	rm -f $(find . -name '*~')
 	rm -fr javadoc
 	exit 0
 	;;
-package|-package)
+package)
 	./pkg/mkproto > pp
 	pkgmk -d /tmp -f pp -r $(pwd) TRIBpctgemini
 	pkgtrans -s /tmp /tmp/TRIBpctgemini.pkg TRIBpctgemini
@@ -42,13 +42,13 @@ package|-package)
 	rm pp
 	exit 0
 	;;
-javadoc|-javadoc)
+javadoc)
 	rm -fr javadoc
 	mkdir javadoc
 	$JAVADOC -classpath "$BUILDJARS:." -Xdoclint:all -d javadoc uk.co.petertribble.pctgemini.{gui,network}
 	exit 0
 	;;
-pmd|-pmd)
+pmd)
 	RULESETS=""
 	shift
 	for RULE in $PMDCATRULES "$@"
