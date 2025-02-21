@@ -54,6 +54,10 @@ public class GeminiRequest {
     private static final int GEMINI_PORT = 1965;
 
     /**
+     * The size of the incoming byte buffer.
+     */
+    private static final int INBUFSIZE = 32768;
+    /**
      * Request status, should be one of the STAT codes above.
      */
     private int status;
@@ -171,7 +175,7 @@ public class GeminiRequest {
      * Read the rest of the data into a byte array.
      */
     private byte[] readBody(InputStream instream) {
-	byte[] inbuf = new byte[32768];
+	byte[] inbuf = new byte[INBUFSIZE];
 	int nread;
 	ByteArrayOutputStream outbuf = new ByteArrayOutputStream();
 	try {

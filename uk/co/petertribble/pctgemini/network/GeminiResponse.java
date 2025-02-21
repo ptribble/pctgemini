@@ -25,6 +25,30 @@ import java.io.IOException;
 public class GeminiResponse {
 
     /**
+     * Result code 1 - need more input.
+     */
+    public static final int RES_NEEDMORE = 1;
+    /**
+     * Result code 2 - success.
+     */
+    public static final int RES_SUCCESS = 2;
+    /**
+     * Result code 3 - redirect.
+     */
+    public static final int RES_REDIRECT = 3;
+    /**
+     * Result code 4 - temporary failure.
+     */
+    public static final int RES_TEMPFAIL = 4;
+    /**
+     * Result code 5 - permanent failure.
+     */
+    public static final int RES_PERMFAIL = 5;
+    /**
+     * Result code 6 - client certificate required.
+     */
+    public static final int RES_NEEDCERT = 6;
+    /**
      * Denotes if the response we have is valid (specifically, set to true
      * if we have a valid response code).
      */
@@ -85,17 +109,17 @@ public class GeminiResponse {
 	if (rescode2 > 10 && rescode2 < 70) {
 	    valid = true;
 	    if (rescode2 >= 60) {
-		rescode1 = 6;
+		rescode1 = RES_NEEDCERT;
 	    } else if (rescode2 >= 50) {
-		rescode1 = 5;
+		rescode1 = RES_PERMFAIL;
 	    } else if (rescode2 >= 40) {
-		rescode1 = 4;
+		rescode1 = RES_TEMPFAIL;
 	    } else if (rescode2 >= 30) {
-		rescode1 = 3;
+		rescode1 = RES_REDIRECT;
 	    } else if (rescode2 >= 20) {
-		rescode1 = 2;
+		rescode1 = RES_SUCCESS;
 	    } else if (rescode2 >= 10) {
-		rescode1 = 1;
+		rescode1 = RES_NEEDMORE;
 	    }
 	}
 	metastring = headers.length > 1 ? headers[1] : "";
@@ -117,7 +141,7 @@ public class GeminiResponse {
      * @return true if the response is expected to have a body
      */
     public boolean hasBody() {
-	return rescode1 == 2;
+	return rescode1 == RES_SUCCESS;
     }
 
     /**
@@ -159,7 +183,7 @@ public class GeminiResponse {
     /**
      * Get the full 2-digit response code.
      *
-     * @return the fill two-digit response code
+     * @return the full two-digit response code
      */
     public int minorCode() {
 	return rescode2;

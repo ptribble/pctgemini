@@ -10,7 +10,7 @@
  * source. A copy of the CDDL is also available via the Internet at
  * http://www.illumos.org/license/CDDL.
  *
- * Copyright 2024  Peter C. Tribble
+ * Copyright 2025  Peter C. Tribble
  */
 
 package uk.co.petertribble.pctgemini.gui;
@@ -44,6 +44,11 @@ public final class GeminiPanel extends JEditorPane
     implements ActionListener, HyperlinkListener {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * The size of the margin around the text in a panel.
+     */
+    private static final int IMARGIN = 5;
 
     /**
      * A JLabel with the name of the page being displayed.
@@ -139,7 +144,7 @@ public final class GeminiPanel extends JEditorPane
 	} else {
 	    jep.setText(gresp.bodyAsString());
 	}
-	jep.setMargin(new Insets(5, 5, 5, 5));
+	jep.setMargin(new Insets(IMARGIN, IMARGIN, IMARGIN, IMARGIN));
 	jep.setCaretPosition(0);
 	jep.setEditable(false);
 	curLabel.setText(url);
@@ -154,18 +159,20 @@ public final class GeminiPanel extends JEditorPane
      */
     private void loadFail(String url, GeminiResponse gresp) {
 	int rescode1 = gresp.majorCode();
-	if (rescode1 == 1) {
+	if (rescode1 == GeminiResponse.RES_NEEDMORE) {
 	    jep.setText("Unhandled code: need more input " + gresp.metaText());
-	} else if (rescode1 == 3) {
+	} else if (rescode1 == GeminiResponse.RES_SUCCESS) {
+	    jep.setText("Unexpected failure on success: " + gresp.metaText());
+	} else if (rescode1 == GeminiResponse.RES_REDIRECT) {
 	    jep.setText("Unhandled redirect to: " + gresp.metaText());
-	} else if (rescode1 == 4) {
+	} else if (rescode1 == GeminiResponse.RES_TEMPFAIL) {
 	    jep.setText("Temporary failure: " + gresp.metaText());
-	} else if (rescode1 == 5) {
+	} else if (rescode1 == GeminiResponse.RES_PERMFAIL) {
 	    jep.setText("Permanent failure: " + gresp.metaText());
-	} else if (rescode1 == 6) {
+	} else if (rescode1 == GeminiResponse.RES_NEEDCERT) {
 	    jep.setText("Client certificate required: " + gresp.metaText());
 	}
-	jep.setMargin(new Insets(5, 5, 5, 5));
+	jep.setMargin(new Insets(IMARGIN, IMARGIN, IMARGIN, IMARGIN));
 	jep.setCaretPosition(0);
 	jep.setEditable(false);
 	curLabel.setText("Error for " + url);
