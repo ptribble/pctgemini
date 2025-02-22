@@ -17,7 +17,6 @@ package uk.co.petertribble.pctgemini.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Desktop;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -32,6 +31,7 @@ import javax.swing.JToolBar;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import uk.co.petertribble.jingle.JingleInfoFrame;
+import uk.co.petertribble.jingle.JingleUtils;
 
 import uk.co.petertribble.pctgemini.network.GeminiRequest;
 import uk.co.petertribble.pctgemini.network.GeminiResponse;
@@ -44,11 +44,6 @@ public final class GeminiPanel extends JEditorPane
     implements ActionListener, HyperlinkListener {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * The size of the margin around the text in a panel.
-     */
-    private static final int IMARGIN = 5;
 
     /**
      * A JLabel with the name of the page being displayed.
@@ -144,7 +139,7 @@ public final class GeminiPanel extends JEditorPane
 	} else {
 	    jep.setText(gresp.bodyAsString());
 	}
-	jep.setMargin(new Insets(IMARGIN, IMARGIN, IMARGIN, IMARGIN));
+	jep.setMargin(JingleUtils.defInsets());
 	jep.setCaretPosition(0);
 	jep.setEditable(false);
 	curLabel.setText(url);
@@ -172,7 +167,7 @@ public final class GeminiPanel extends JEditorPane
 	} else if (rescode1 == GeminiResponse.RES_NEEDCERT) {
 	    jep.setText("Client certificate required: " + gresp.metaText());
 	}
-	jep.setMargin(new Insets(IMARGIN, IMARGIN, IMARGIN, IMARGIN));
+	jep.setMargin(JingleUtils.defInsets());
 	jep.setCaretPosition(0);
 	jep.setEditable(false);
 	curLabel.setText("Error for " + url);
