@@ -10,13 +10,13 @@
  * source. A copy of the CDDL is also available via the Internet at
  * http://www.illumos.org/license/CDDL.
  *
- * Copyright 2024  Peter C. Tribble
+ * Copyright 2025  Peter C. Tribble
  */
 
 package uk.co.petertribble.pctgemini.network;
 
-import java.net.URL;
-import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -76,7 +76,7 @@ public class GeminiRequest {
     /**
      * A backing url used to parse the requested url.
      */
-    private URL backurl;
+    private URI backurl;
 
     /**
      * Set up a request to the given URL.
@@ -154,8 +154,8 @@ public class GeminiRequest {
     private void setBackURL() {
 	if (backurl == null) {
 	    try {
-		backurl = new URL(gurl.replace("gemini://", "http://"));
-	    } catch (MalformedURLException mue) {
+		backurl = new URI(gurl.replace("gemini://", "http://"));
+	    } catch (URISyntaxException mue) {
 	    }
 	}
     }

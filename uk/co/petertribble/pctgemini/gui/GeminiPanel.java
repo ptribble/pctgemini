@@ -64,11 +64,11 @@ public final class GeminiPanel extends JEditorPane
     /**
      * List of opened pages for history.
      */
-    private List<String> historyList = new ArrayList<>();
+    private transient List<String> historyList = new ArrayList<>();
     /**
      * Cache of pages we might go back to.
      */
-    private Map<String, GeminiResponse> pageCache = new HashMap<>();
+    private transient Map<String, GeminiResponse> pageCache = new HashMap<>();
 
     /**
      * Create a basic panel to display Gemini content.
