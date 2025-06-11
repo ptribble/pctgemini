@@ -49,13 +49,6 @@ javadoc)
 	exit 0
 	;;
 pmd)
-	RULESETS=""
-	shift
-	for RULE in $PMDCATRULES "$@"
-	do
-	    RULESETS="${RULESETS},category/java/${RULE}.xml"
-	done
-	RULESETS=${RULESETS/,/}
 	if [ ! -d "${HOME}/.pmd" ]; then
 	    mkdir -p "${HOME}/.pmd"
 	fi
