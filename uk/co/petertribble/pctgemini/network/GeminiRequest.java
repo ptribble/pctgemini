@@ -56,7 +56,7 @@ public class GeminiRequest {
     /**
      * The size of the incoming byte buffer.
      */
-    private static final int INBUFSIZE = 32768;
+    private static final int INBUFSIZE = 32_768;
     /**
      * Request status, should be one of the STAT codes above.
      */

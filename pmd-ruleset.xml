@@ -18,7 +18,6 @@
       <exclude name="MethodArgumentCouldBeFinal"/>
       <exclude name="OnlyOneReturn"/>
       <exclude name="ShortVariable"/>
-      <exclude name="UseUnderscoresInNumericLiterals"/>
     </rule>
     <rule ref="rulesets/java/quickstart.xml">
       <exclude name="EmptyCatchBlock"/>
