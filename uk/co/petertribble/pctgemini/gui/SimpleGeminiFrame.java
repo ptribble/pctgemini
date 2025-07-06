@@ -87,7 +87,7 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Pop up a window with the source of the currently diasplayed page.
+     * Pop up a window with the source of the currently displayed page.
      * Simply directs the panel to do the actual work.
      */
     public void showViewSource() {
