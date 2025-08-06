@@ -116,16 +116,17 @@ public class GeminiRequest {
 	     * at the \n and skip any \r). Then we read the body as a byte
 	     * array because it could be any mime type.
 	     */
-	    char c = (char) instream.read();
+	    int i = instream.read();
 	    StringBuilder hbuf = new StringBuilder();
-	    while (c != -1) {
+	    while (i != -1) {
+		char c = (char) i;
 		if (c == '\n') {
 		    break;
 		}
 		if (c != '\r') {
 		    hbuf.append(c);
 		}
-		c = (char) instream.read();
+		i = instream.read();
 	    }
 	    // once we have a header, create the response object
 	    response = new GeminiResponse(hbuf.toString());
