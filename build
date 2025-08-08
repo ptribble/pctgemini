@@ -54,9 +54,11 @@ spotbugs)
 	#
 	javac -Xlint -classpath ".:${BUILDJARS}" uk/co/petertribble/pctgemini/*/*.java
 	spotbugs -auxclasspath $(echo lib/java/* | sed 's= =:=g') uk
+	rm -f $(find uk -name '*.class')
 	exit 0
 	;;
 esac
 
 javac -Xlint -classpath ".:${BUILDJARS}" uk/co/petertribble/pctgemini/*/*.java
 jar cmf pctgemini.manifest lib/java/pctgemini.jar $(find uk -name '*.class')
+rm -f $(find uk -name '*.class')
