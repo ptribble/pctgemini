@@ -52,7 +52,7 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
      *
      * @param url the initial url to be displayed
      */
-    public SimpleGeminiFrame(String url) {
+    public SimpleGeminiFrame(final String url) {
 	super("Gemini");
 	addWindowListener(new WindowExit());
 
@@ -81,7 +81,7 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
 
     class WindowExit extends WindowAdapter {
 	@Override
-	public void windowClosing(WindowEvent we) {
+	public void windowClosing(final WindowEvent we) {
 	    System.exit(0);
 	}
     }
@@ -95,7 +95,7 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
 	if (exitItem.equals(e.getSource())) {
 	    System.exit(0);
 	}
@@ -110,7 +110,7 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
      *
      * @param args command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 	if (args.length > 0) {
 	    new SimpleGeminiFrame(args[0]);
 	} else {

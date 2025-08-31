@@ -76,7 +76,7 @@ public class GeminiResponse {
      *
      * @param header a 1-line String containing the response header
      */
-    public GeminiResponse(String header) {
+    public GeminiResponse(final String header) {
 	parseheader(header);
     }
 
@@ -86,7 +86,7 @@ public class GeminiResponse {
      *
      * @param inbody the body of the response
      */
-    protected void addBody(byte[] inbody) {
+    protected void addBody(final byte[] inbody) {
 	body = inbody; //NOPMD
     }
 
@@ -97,7 +97,7 @@ public class GeminiResponse {
      *
      * so we just break it in 2.
      */
-    private void parseheader(String header) {
+    private void parseheader(final String header) {
 	String[] headers = header.split("\\s+", 2);
 	// status is the first word, parse that
 	try {

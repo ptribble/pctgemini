@@ -35,12 +35,14 @@ public final class GeminiTrustManager implements X509TrustManager {
     }
 
     @Override
-    public void checkClientTrusted(X509Certificate[] chain, String authType) {
+    public void checkClientTrusted(final X509Certificate[] chain,
+				   final String authType) {
 	// Nothing to do
     }
 
     @Override
-    public void checkServerTrusted(X509Certificate[] chain, String authType) {
+    public void checkServerTrusted(final X509Certificate[] chain,
+				   final String authType) {
 	// Nothing to do
     }
 }

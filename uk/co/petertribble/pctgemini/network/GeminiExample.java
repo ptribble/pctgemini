@@ -33,7 +33,7 @@ public final class GeminiExample {
      *
      * @param args ignored
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 	String sreq = (args.length > 0) ? args[0]
 	    : "gemini://geminiprotocol.net/docs/tech-overview.gmi";
 	GeminiRequest greq = new GeminiRequest(sreq);

@@ -83,7 +83,7 @@ public class GeminiRequest {
      *
      * @param url the URL to be retrieved.
      */
-    public GeminiRequest(String url) {
+    public GeminiRequest(final String url) {
 	gurl = url;
 	status = STAT_INIT;
     }
@@ -175,7 +175,7 @@ public class GeminiRequest {
     /*
      * Read the rest of the data into a byte array.
      */
-    private byte[] readBody(InputStream instream) {
+    private byte[] readBody(final InputStream instream) {
 	byte[] inbuf = new byte[INBUFSIZE];
 	int nread;
 	ByteArrayOutputStream outbuf = new ByteArrayOutputStream();

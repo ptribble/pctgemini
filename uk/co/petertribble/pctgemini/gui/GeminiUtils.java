@@ -33,7 +33,7 @@ public final class GeminiUtils {
      *
      * @return the text converted to html form
      */
-    public static String geminiToHtml(String instring) {
+    public static String geminiToHtml(final String instring) {
 	StringBuilder sb = new StringBuilder(54);
 	// toggle preformatted
 	boolean toggle = false;

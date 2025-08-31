@@ -81,7 +81,7 @@ public final class GeminiSocketFactory {
      *
      * @return an SSLSocket
      */
-    public static SSLSocket getSocket(String host, int port)
+    public static SSLSocket getSocket(final String host, final int port)
 		throws IOException {
 	SSLSocket sslsock = (SSLSocket) getFactory().createSocket(host, port);
 	SSLParameters params = new SSLParameters();

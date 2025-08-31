@@ -98,7 +98,7 @@ public final class GeminiPanel extends JEditorPane
      *
      * @param url the new url to show
      */
-    public void loadPage(String url) {
+    public void loadPage(final String url) {
 	surl = url;
 	/*
 	 * Always add the page to the history list, so we can always go
@@ -132,7 +132,7 @@ public final class GeminiPanel extends JEditorPane
     /*
      * Display a response in the panel.
      */
-    private void loadPage(String url, GeminiResponse gresp) {
+    private void loadPage(final String url, final GeminiResponse gresp) {
 	if ("text/gemini".equals(gresp.metaText())) {
 	    jep.setContentType("text/html");
 	    jep.setText(GeminiUtils.geminiToHtml(gresp.bodyAsString()));
@@ -152,7 +152,7 @@ public final class GeminiPanel extends JEditorPane
      * failures earlier, this is for the case where we got a reply that
      * wasn't a 2x code.
      */
-    private void loadFail(String url, GeminiResponse gresp) {
+    private void loadFail(final String url, final GeminiResponse gresp) {
 	int rescode1 = gresp.majorCode();
 	if (rescode1 == GeminiResponse.RES_NEEDMORE) {
 	    jep.setText("Unhandled code: need more input " + gresp.metaText());
@@ -202,14 +202,14 @@ public final class GeminiPanel extends JEditorPane
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
 	goBack();
     }
 
     /*
      * Take the link text and normalize it into fully qualified form.
      */
-    private String normalizeLink(String ilink) {
+    private String normalizeLink(final String ilink) {
 	/*
 	 * Already fully qualified.
 	 */
@@ -237,7 +237,7 @@ public final class GeminiPanel extends JEditorPane
      * Try and visit the requested link. If it's a gemini link, we open
      * it here. If not we fail and let something else handle it.
      */
-    private boolean gotoLink(String s) {
+    private boolean gotoLink(final String s) {
 	if (s.startsWith("gemini://")) {
 	    loadPage(s);
 	    return true;
@@ -247,7 +247,7 @@ public final class GeminiPanel extends JEditorPane
     }
 
     @Override
-    public void hyperlinkUpdate(HyperlinkEvent ev) {
+    public void hyperlinkUpdate(final HyperlinkEvent ev) {
 	if (ev.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 	    if (!gotoLink(normalizeLink(ev.getDescription()))) {
 		// not gemini, punt to external
