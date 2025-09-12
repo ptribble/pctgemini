@@ -107,7 +107,7 @@ public class GeminiResponse {
 	    rescode2 = 0;
 	}
 	// check for validity
-	if (rescode2 > 10 && rescode2 < 70) {
+	if (rescode2 >= 10 && rescode2 < 70) {
 	    valid = true;
 	    if (rescode2 >= 60) {
 		rescode1 = RES_NEEDCERT;
