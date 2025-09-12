@@ -18,6 +18,7 @@ package uk.co.petertribble.pctgemini.network;
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Contains a response from a gemini server.
@@ -155,7 +156,7 @@ public class GeminiResponse {
 	}
 	String s = "";
 	InputStreamReader isr = new InputStreamReader(
-					     new ByteArrayInputStream(body));
+		     new ByteArrayInputStream(body), StandardCharsets.UTF_8);
 	try {
 	    int l = body.length;
 	    char[] cc = new char[l];

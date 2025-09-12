@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import javax.net.ssl.SSLSocket;
 
 /**
@@ -105,7 +106,8 @@ public class GeminiRequest {
 	try (SSLSocket sslsock = GeminiSocketFactory.getSocket(host, port);
 	     InputStream instream = sslsock.getInputStream();
 	     OutputStream outstream = sslsock.getOutputStream();
-	     PrintStream reqstream = new PrintStream(outstream); ) {
+	     PrintStream reqstream =
+	         new PrintStream(outstream, false, StandardCharsets.UTF_8); ) {
 	    // the spec says terminate with <CR><LF> so be explicit
 	    reqstream.print(gurl + "\r\n");
 	    reqstream.flush();
