@@ -31,7 +31,7 @@ package)
 	pkgmk -d /tmp -f pp -r $(pwd) TRIBpctgemini
 	pkgtrans -s /tmp /tmp/TRIBpctgemini.pkg TRIBpctgemini
 	rm -fr /tmp/TRIBpctgemini
-	ls -l /tmp/TRIBpctgemini.pkg 
+	ls -l /tmp/TRIBpctgemini.pkg
 	rm pp
 	exit 0
 	;;
