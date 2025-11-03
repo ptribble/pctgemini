@@ -72,7 +72,7 @@ public final class GeminiUtils {
 		    sb.append("<h1>").append(s2).append("</h1>");
 		} else {
 		    // elide blank lines as they would be a paragraph
-		    if (!s.strip().isEmpty()) {
+		    if (!s.isBlank()) {
 			sb.append("<p>")
 			    .append(s.replace("<", "&lt;").replace(">", "&gt;"))
 			    .append("</p>\n");
