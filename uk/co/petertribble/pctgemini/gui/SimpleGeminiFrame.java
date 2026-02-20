@@ -10,7 +10,7 @@
  * source. A copy of the CDDL is also available via the Internet at
  * http://www.illumos.org/license/CDDL.
  *
- * Copyright 2024 Peter C. Tribble
+ * Copyright 2026 Peter C. Tribble
  */
 
 package uk.co.petertribble.pctgemini.gui;
@@ -36,15 +36,15 @@ public final class SimpleGeminiFrame extends JFrame implements ActionListener {
     /**
      * A menu item for Exit.
      */
-    private JMenuItem exitItem;
+    private final JMenuItem exitItem;
     /**
      * A menu item for View Source.
      */
-    private JMenuItem viewSourceItem;
+    private final JMenuItem viewSourceItem;
     /**
      * The panel being displayed.
      */
-    private GeminiPanel gpanel;
+    private final GeminiPanel gpanel;
 
     /**
      * Create a new SimpleGeminiFrame, which is simply a wrapper around

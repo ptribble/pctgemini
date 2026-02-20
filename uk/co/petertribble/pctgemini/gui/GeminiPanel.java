@@ -10,7 +10,7 @@
  * source. A copy of the CDDL is also available via the Internet at
  * http://www.illumos.org/license/CDDL.
  *
- * Copyright 2025 Peter C. Tribble
+ * Copyright 2026 Peter C. Tribble
  */
 
 package uk.co.petertribble.pctgemini.gui;
@@ -48,15 +48,15 @@ public final class GeminiPanel extends JEditorPane
     /**
      * A JLabel with the name of the page being displayed.
      */
-    private JLabel curLabel;
+    private final JLabel curLabel;
     /**
      * A JButton to go back to the previous page.
      */
-    private JButton backButton;
+    private final JButton backButton;
     /**
      * The JEditorPane with the page content.
      */
-    private JEditorPane jep;
+    private final JEditorPane jep;
     /**
      * Save the URL to resolve relative links.
      */
@@ -64,11 +64,12 @@ public final class GeminiPanel extends JEditorPane
     /**
      * List of opened pages for history.
      */
-    private transient List<String> historyList = new ArrayList<>();
+    private final transient List<String> historyList = new ArrayList<>();
     /**
      * Cache of pages we might go back to.
      */
-    private transient Map<String, GeminiResponse> pageCache = new HashMap<>();
+    private final transient Map<String, GeminiResponse> pageCache
+	= new HashMap<>();
 
     /**
      * Create a basic panel to display Gemini content.
