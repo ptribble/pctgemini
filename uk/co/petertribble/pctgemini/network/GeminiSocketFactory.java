@@ -10,7 +10,7 @@
  * source. A copy of the CDDL is also available via the Internet at
  * http://www.illumos.org/license/CDDL.
  *
- * Copyright 2024 Peter C. Tribble
+ * Copyright 2026 Peter C. Tribble
  */
 
 package uk.co.petertribble.pctgemini.network;
@@ -77,9 +77,9 @@ public final class GeminiSocketFactory {
      * @param host the name of the host to connect to
      * @param port the port to connect to
      *
-     * @throws IOException if the underlying socket creation fails
-     *
      * @return an SSLSocket
+     *
+     * @throws IOException if the underlying socket creation fails
      */
     public static SSLSocket getSocket(final String host, final int port)
 		throws IOException {
