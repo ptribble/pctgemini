@@ -10,7 +10,7 @@
  * source. A copy of the CDDL is also available via the Internet at
  * http://www.illumos.org/license/CDDL.
  *
- * Copyright 2024 Peter C. Tribble
+ * Copyright 2026 Peter C. Tribble
  */
 
 package uk.co.petertribble.pctgemini.network;
@@ -21,10 +21,10 @@ import javax.net.ssl.X509TrustManager;
 /**
  * A basic TrustManager that accepts all certificates.
  *
- * Many Gemini servers don't use certificates issued by a public CA,
+ * <p>Many Gemini servers don't use certificates issued by a public CA,
  * so don't validate them.
  *
- * In the future, implement TOFU and store the certificates we see
+ * <p>In the future, implement TOFU and store the certificates we see
  * so they can be checked for changes.
  */
 public final class GeminiTrustManager implements X509TrustManager {

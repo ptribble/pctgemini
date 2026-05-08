@@ -10,14 +10,14 @@
  * source. A copy of the CDDL is also available via the Internet at
  * http://www.illumos.org/license/CDDL.
  *
- * Copyright 2024 Peter C. Tribble
+ * Copyright 2026 Peter C. Tribble
  */
 
 package uk.co.petertribble.pctgemini.network;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -88,7 +88,7 @@ public class GeminiResponse {
      * @param inbody the body of the response
      */
     protected void addBody(final byte[] inbody) {
-	body = inbody; //NOPMD
+	body = inbody; // NOPMD
     }
 
     /*
