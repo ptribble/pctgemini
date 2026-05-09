@@ -29,6 +29,7 @@ public class RunBrowser {
      * The name of the first browser we find.
      */
     private static String browserbin;
+
     /*
      * We search all the following locations for a browser.
      */

@@ -16,6 +16,7 @@
 package uk.co.petertribble.pctgemini.network;
 
 import uk.co.petertribble.pctgemini.gui.GeminiUtils;
+
 /**
  * Simple test of a gemini request.
  */
