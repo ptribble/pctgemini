@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# SPDX-License-Identifier: CDDL-1.0
+#
+# Copyright 2026 Peter Tribble
+#
+
+#
+# The Gemini protocol requires everything to be UTF-8. In JDK18 that's
+# the default encoding, but need to specify it for older versions.
+#
+exec java -Dfile.encoding="UTF-8" -jar /usr/share/pctgemini/pctgemini.jar "$@"

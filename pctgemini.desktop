@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Peter Tribble
+# SPDX-License-Identifier: CDDL-1.0
+[Desktop Entry]
+Version=1.0
+Name=PctGemini
+Comment=Simple Gemini Client, in Java
+Exec=pctgemini
+Icon=pctgemini
+Terminal=false
+Type=Application
+Categories=Network;

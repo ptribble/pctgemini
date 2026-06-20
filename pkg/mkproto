@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# SPDX-License-Identifier: CDDL-1.0
+#
+# Copyright 2026 Peter Tribble
+#
+# generate a prototype file for input to pkgmk
+#
+# feed to pkgmk like so:
+#  pkgmk -d /tmp -f tt -r `pwd` TRIBpctgemini
+#
+JARDIR=usr/share/pctgemini
+OWNER="root bin"
+SYSOWNER="root sys"
+
+echo "i pkginfo=./pkg/pkginfo"
+echo "i postinstall=./pkg/postinstall"
+echo "i postremove=./pkg/postinstall"
+echo "d none /usr 0755 ${SYSOWNER}"
+echo "d none /usr/bin 0755 ${OWNER}"
+echo "f none /usr/bin/pctgemini=pkg/pctgemini.installed 0755 ${OWNER}"
+echo "d none /usr/share 0755 ${SYSOWNER}"
+echo "d none /usr/share/applications 0755 root other"
+echo "d none /usr/share/pixmaps 0755 root other"
+echo "d none /usr/share/pctgemini 0755 ${OWNER}"
+echo "f none /usr/share/pctgemini/README.md=README.md 0755 ${OWNER}"
+echo "f none /usr/share/pctgemini/pctgemini.jar=lib/java/pctgemini.jar 0755 ${OWNER}"
+echo "f none /usr/share/pctgemini/jingle.jar=lib/java/jingle.jar 0755 ${OWNER}"
+echo "f none /usr/share/pctgemini/jumble.jar=lib/java/jumble.jar 0755 ${OWNER}"
+echo "f none /usr/share/pixmaps/pctgemini.png=pixmaps/pctgemini.png 0755 ${OWNER}"
+echo "f none /usr/share/applications/pctgemini.desktop=pctgemini.desktop 0755 ${OWNER}"

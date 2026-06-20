@@ -1,0 +1,15 @@
+#!/sbin/sh
+#
+# SPDX-License-Identifier: CDDL-1.0
+#
+# Copyright 2026 Peter Tribble
+#
+# Automatically generated service restart script
+# Valid on both Solaris 10 and later distros
+#
+if [ "${BASEDIR}" = "/" ]; then
+  if [ -f /lib/svc/method/icon-cache ]; then
+    /usr/sbin/svcadm restart svc:/application/desktop-cache/icon-cache:default
+  fi
+fi
+exit 0
