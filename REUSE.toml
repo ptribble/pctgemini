@@ -1,6 +1,6 @@
 version = 1
 
 [[annotations]]
-path = [ "README.md", "pctgemini.manifest", "lib/java/jingle.jar", "lib/java/jumble.jar", "lib/java/pctgemini.jar" ]
-SPDX-FileCopyrightText = "2025 Peter Tribble"
+path = [ "README.md", "pctgemini.manifest", "lib/java/jingle.jar", "lib/java/jumble.jar", "lib/java/pctgemini.jar", "pixmaps/pctgemini.png", "pkg/pkginfo" ]
+SPDX-FileCopyrightText = "2026 Peter Tribble"
 SPDX-License-Identifier = "CDDL-1.0"
